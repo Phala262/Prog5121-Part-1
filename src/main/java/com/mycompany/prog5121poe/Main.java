@@ -55,7 +55,7 @@ if (!loginStatus) {
 }
 
 System.out.println("Welcome to QuickChat!");
-        System.out.println("Welcome to QuickChat.");
+        
 
         MessageManager manager = new MessageManager();
  
