@@ -4,7 +4,6 @@
  */
 package com.mycompany.prog5121poe;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
@@ -65,129 +64,39 @@ System.out.println("Welcome to QuickChat!");
 
         while (running) {
 
-            System.out.println("\n1. Send Messages");
-            System.out.println("2. Show recently sent messages");
-            System.out.println("3. Quit");
-            System.out.print("Choose an option: ");
+    System.out.println("\nQUICKCHAT MENU");
+    System.out.println("1. Send Messages");
+    System.out.println("2. Coming Soon");
+    System.out.println("3. Quit");
+    System.out.println("4. Stored Messages");
 
-            String option = input.nextLine();
+    System.out.print("Choose an option: ");
 
-            switch (option) {
+    String option = input.nextLine();
 
-                case "1":
+    switch (option) {
 
-                    System.out.print(
-                            "How many messages would you like to enter? ");
+        case "1":
+            // Your existing Send Messages code goes here.
+            break;
 
-                    int numberOfMessages;
+        case "2":
+            System.out.println("Coming Soon.");
+            break;
 
-                    try {
-                        numberOfMessages = Integer.parseInt(
-                                input.nextLine());
+        case "3":
+            running = false;
+            System.out.println("Thank you for using QuickChat.");
+            break;
 
-                        if (numberOfMessages < 0) {
-                            System.out.println(
-                                    "Enter a valid positive number.");
-                            break;
-                        }
+        case "4":
+            // Part 3 stored messages functionality.
+            // We will connect this to MessageManager.java.
+            break;
 
-                    } catch (NumberFormatException e) {
-                        System.out.println("Enter a valid number.");
-                        break;
-                    }
-
-                    for (int i = 1; i <= numberOfMessages; i++) {
-
-                        System.out.println("\nMessage " + i);
-
-                        System.out.print("Enter recipient number: ");
-                        String recipient = input.nextLine();
-
-                        System.out.print("Enter message: ");
-                        String text = input.nextLine();
-
-                        Message message = new Message(
-                                recipient, text, i);
-
-                        if (!message.checkMessageID()) {
-                            System.out.println("Invalid message ID.");
-                            continue;
-                        }
-
-                        if (!message.checkRecipientCell()) {
-                            System.out.println(
-                                    "Cell phone number is incorrectly "
-                                    + "formatted or does not contain "
-                                    + "an international code. "
-                                    + "Please correct the number "
-                                    + "and try again.");
-                            continue;
-                        }
-
-                        String validation = message.validateMessage();
-
-                        if (!validation.equals("Message ready to send.")) {
-                            System.out.println(validation);
-                            continue;
-                        }
-
-                        System.out.println("\n" + message.printMessages());
-
-                        System.out.println("\n1. Send Message");
-                        System.out.println("2. Disregard Message");
-                        System.out.println("3. Store Message to send later");
-                        System.out.print("Choose an option: ");
-
-                        String choice = input.nextLine();
-
-                        System.out.println(
-                                manager.processMessage(message, choice));
-                        if (choice.equals("3")){
-                            boolean saved = manager.storeMessages();
-                             
-                            if (saved) {
-                               System.out.println("Messages saved to json.");
-                            } else {
-                               System.out.println("Could not save messages.json.");
-                            }
-                        }
-                    }
-
-                    System.out.println("Total messages sent: "
-                            + manager.returnTotalMessages());
-
-                    break;
-
-                case "2":
-
-                    ArrayList<Message> messages = manager.getMessages();
-
-                    if (messages.isEmpty()) {
-                        System.out.println("No messages available.");
-                    } else {
-                        for (Message message : messages) {
-                            System.out.println(
-                                    message.printMessages());
-                            System.out.println("--------------------");
-                        }
-                    }
-
-                    break;
-
-                case "3":
-
-                    running = false;
-                    System.out.println("Thank you for using QuickChat.");
-
-                    break;
-
-                default:
-
-                    System.out.println(
-                            "Invalid option. Please try again.");
-            }
+        default:
+            System.out.println("Invalid option. Please try again.");
+    }
         }
-
-        input.close();
     }
 }
